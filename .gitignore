@@ -46,3 +46,4 @@ todo.*
 /build/
 /out/
 /run/
+src/generated/resources/.cache/
