@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "engineersdecor:dense_grit_dirt_block"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "engineersdecor:blocks/dense_grit_dirt_block"
+}

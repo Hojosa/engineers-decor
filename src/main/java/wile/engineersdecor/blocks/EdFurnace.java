@@ -132,30 +132,30 @@ public class EdFurnace
       world.setBlockAndUpdate(pos, state.setValue(LIT, bte.burning()));
     }
 
-    @Override
-    public boolean hasDynamicDropList()
-    { return true; }
-
-    @Override
-    public List<ItemStack> dropList(BlockState state, Level world, final BlockEntity te, boolean explosion) {
-      final List<ItemStack> stacks = new ArrayList<>();
-      if(world.isClientSide) return stacks;
-      if(!(te instanceof FurnaceTileEntity)) return stacks;
-      if(!explosion) {
-        ItemStack stack = new ItemStack(this, 1);
-        CompoundTag inventory_nbt = ((FurnaceTileEntity)te).reset_getnbt();
-        if(!inventory_nbt.isEmpty()) {
-          CompoundTag nbt = new CompoundTag();
-          nbt.put("inventory", inventory_nbt);
-          stack.setTag(nbt);
-        }
-        stacks.add(stack);
-      } else {
-        for(ItemStack stack: ((FurnaceTileEntity)te).inventory_) stacks.add(stack);
-        ((FurnaceTileEntity)te).reset();
-      }
-      return stacks;
-    }
+//    @Override
+//    public boolean hasDynamicDropList()
+//    { return true; }
+//
+//    @Override
+//    public List<ItemStack> dropList(BlockState state, Level world, final BlockEntity te, boolean explosion) {
+//      final List<ItemStack> stacks = new ArrayList<>();
+//      if(world.isClientSide) return stacks;
+//      if(!(te instanceof FurnaceTileEntity)) return stacks;
+//      if(!explosion) {
+//        ItemStack stack = new ItemStack(this, 1);
+//        CompoundTag inventory_nbt = ((FurnaceTileEntity)te).reset_getnbt();
+//        if(!inventory_nbt.isEmpty()) {
+//          CompoundTag nbt = new CompoundTag();
+//          nbt.put("inventory", inventory_nbt);
+//          stack.setTag(nbt);
+//        }
+//        stacks.add(stack);
+//      } else {
+//        for(ItemStack stack: ((FurnaceTileEntity)te).inventory_) stacks.add(stack);
+//        ((FurnaceTileEntity)te).reset();
+//      }
+//      return stacks;
+//    }
 
     @Override
     @SuppressWarnings("deprecation")

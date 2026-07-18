@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "engineersdecor:small_tree_cutter"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "engineersdecor:blocks/small_tree_cutter"
+}

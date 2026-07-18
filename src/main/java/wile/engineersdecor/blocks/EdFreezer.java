@@ -108,16 +108,16 @@ public class EdFreezer
     public boolean hasDynamicDropList()
     { return true; }
 
-    @Override
-    public List<ItemStack> dropList(BlockState state, Level world, BlockEntity te, boolean explosion)
-    {
-      final List<ItemStack> stacks = new ArrayList<>();
-      if(world.isClientSide) return stacks;
-      if(!(te instanceof FreezerTileEntity)) return stacks;
-      ((FreezerTileEntity)te).reset_process();
-      stacks.add(new ItemStack(this, 1));
-      return stacks;
-    }
+//    @Override
+//    public List<ItemStack> dropList(BlockState state, Level world, BlockEntity te, boolean explosion)
+//    {
+//      final List<ItemStack> stacks = new ArrayList<>();
+//      if(world.isClientSide) return stacks;
+//      if(!(te instanceof FreezerTileEntity)) return stacks;
+//      ((FreezerTileEntity)te).reset_process();
+//      stacks.add(new ItemStack(this, 1));
+//      return stacks;
+//    }
 
     @Override
     @SuppressWarnings("deprecation")

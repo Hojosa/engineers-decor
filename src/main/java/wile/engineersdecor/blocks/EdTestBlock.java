@@ -78,9 +78,9 @@ public class EdTestBlock
     public boolean hasDynamicDropList()
     { return true; }
 
-    @Override
-    public List<ItemStack> dropList(BlockState state, Level world, BlockEntity te, boolean explosion)
-    { return Collections.singletonList(new ItemStack(this)); }
+//    @Override
+//    public List<ItemStack> dropList(BlockState state, Level world, BlockEntity te, boolean explosion)
+//    { return Collections.singletonList(new ItemStack(this)); }
 
     @Override
     @SuppressWarnings("deprecation")

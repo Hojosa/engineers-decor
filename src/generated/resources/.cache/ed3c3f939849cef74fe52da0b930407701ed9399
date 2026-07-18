@@ -1,11 +1,11 @@
-// 1.20.1	2026-07-18T18:53:50.59110336	Engineer's Decor Block Tags
+// 1.20.1	2026-07-18T21:50:40.640563097	Engineer's Decor Block Tags
 1f3664d8b86eac303a19999f4739bd0a377494e2 data/minecraft/tags/blocks/climbable.json
 404be746acf5c0a895d5b2752fa17bf4d99b3b20 data/minecraft/tags/blocks/dirt.json
 fedd06b26dadaa4ec71fe9490b0e54f41f5673aa data/minecraft/tags/blocks/doors.json
 3e32897fe3b6532f56c673cb63375b53872f9027 data/minecraft/tags/blocks/fence_gates.json
 62c44ec32dc5577e9b6d09a92f7457ae44427c97 data/minecraft/tags/blocks/fences.json
 136b372a839bc0956ed749f0adaf2333a030043e data/minecraft/tags/blocks/mineable/axe.json
-3f111df8b47cb497c1fd4fbdb4fbe22f92069f70 data/minecraft/tags/blocks/mineable/pickaxe.json
+c5e4a4a9f1e52880c209dae56c68de9c5be8fe56 data/minecraft/tags/blocks/mineable/pickaxe.json
 2bf66734245f05f16c348dd9c06825043b213c17 data/minecraft/tags/blocks/mineable/shovel.json
 ad85c2b706847ddbd480312a3cdcce7d0183028f data/minecraft/tags/blocks/slabs.json
 3b1c97d1de76104ce3f3e368ea2b750c55b9d103 data/minecraft/tags/blocks/stairs.json
