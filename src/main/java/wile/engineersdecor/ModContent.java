@@ -44,6 +44,9 @@ import wile.engineersdecor.items.EdItem;
 import wile.engineersdecor.libmc.*;
 
 import javax.annotation.Nonnull;
+
+import blusunrize.immersiveengineering.common.register.IEBlocks;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -143,22 +146,22 @@ public class ModContent
 
     // -------------------------------------------------------------------------------------------------------------------
 
-    Registries.addBlock("slag_brick_block", ()->new StandardBlocks.BaseBlock(
-      StandardBlocks.CFG_DEFAULT,
-      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(0.5f, 7f).sound(SoundType.STONE)
-    ));
-    Registries.addBlock("slag_brick_slab", ()->new VariantSlabBlock(
-      StandardBlocks.CFG_DEFAULT,
-      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(0.5f, 7f).sound(SoundType.STONE)
-    ));
-    Registries.addBlock("slag_brick_stairs", ()->new StandardStairsBlock(
-      StandardBlocks.CFG_DEFAULT,
-      ()->Registries.getBlock("slag_brick_block").defaultBlockState(),
-      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(0.5f, 7f).sound(SoundType.STONE)
-    ));
+//    Registries.addBlock("slag_brick_block", ()->new StandardBlocks.BaseBlock(
+//      StandardBlocks.CFG_DEFAULT,
+//      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(0.5f, 7f).sound(SoundType.STONE)
+//    ));
+//    Registries.addBlock("slag_brick_slab", ()->new VariantSlabBlock(
+//      StandardBlocks.CFG_DEFAULT,
+//      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(0.5f, 7f).sound(SoundType.STONE)
+//    ));
+//    Registries.addBlock("slag_brick_stairs", ()->new StandardStairsBlock(
+//      StandardBlocks.CFG_DEFAULT,
+//      ()->Registries.getBlock("slag_brick_block").defaultBlockState(),
+//      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(0.5f, 7f).sound(SoundType.STONE)
+//    ));
     Registries.addBlock("slag_brick_wall", ()->new EdWallBlock(
       StandardBlocks.CFG_DEFAULT,
-      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(0.5f, 7f).sound(SoundType.STONE)
+      BlockBehaviour.Properties.copy(IEBlocks.StoneDecoration.SLAG_BRICK.get())
     ));
 
     // -------------------------------------------------------------------------------------------------------------------
@@ -205,11 +208,11 @@ public class ModContent
 
     Registries.addBlock("panzerglass_block", ()->new EdGlassBlock(
       StandardBlocks.CFG_TRANSLUCENT,
-      BlockBehaviour.Properties.copy(Blocks.GLASS).mapColor(MapColor.NONE).strength(0.5f, 2000f).sound(SoundType.METAL).noOcclusion().isValidSpawn(detail::disallowSpawn)
+      BlockBehaviour.Properties.copy(Blocks.GLASS).mapColor(MapColor.NONE).strength(0.5f, 2000f).sound(SoundType.GLASS).noOcclusion().isValidSpawn(detail::disallowSpawn)
     ));
     Registries.addBlock("panzerglass_slab", ()->new VariantSlabBlock(
       StandardBlocks.CFG_TRANSLUCENT,
-      BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).mapColor(Blocks.IRON_BLOCK.defaultMapColor()).strength(0.5f, 2000f).sound(SoundType.METAL).noOcclusion().isValidSpawn(detail::disallowSpawn)
+      BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).mapColor(Blocks.IRON_BLOCK.defaultMapColor()).strength(0.5f, 2000f).sound(SoundType.GLASS).noOcclusion().isValidSpawn(detail::disallowSpawn)
     ));
 
     // -------------------------------------------------------------------------------------------------------------------
@@ -264,11 +267,11 @@ public class ModContent
 
     Registries.addBlock("dense_grit_sand_block", ()->new StandardBlocks.BaseBlock(
       StandardBlocks.CFG_DEFAULT,
-      BlockBehaviour.Properties.copy(Blocks.DIRT).mapColor(Blocks.DIRT.defaultMapColor()).strength(0.1f, 3f).sound(SoundType.GRAVEL)
+      BlockBehaviour.Properties.copy(Blocks.SAND)
     ));
     Registries.addBlock("dense_grit_dirt_block", ()->new StandardBlocks.BaseBlock(
       StandardBlocks.CFG_DEFAULT,
-      BlockBehaviour.Properties.copy(Blocks.DIRT).mapColor(Blocks.DIRT.defaultMapColor()).strength(0.1f, 3f).sound(SoundType.GRAVEL)
+      BlockBehaviour.Properties.copy(Blocks.DIRT)
     ));
     Registries.addBlock("dark_shingle_roof_slabslice", ()->new SlabSliceBlock(
       StandardBlocks.CFG_DEFAULT,
