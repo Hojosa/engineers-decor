@@ -23,7 +23,6 @@ _*
 /classes
 /dev
 /dist
-/src/generated
 /src/main/java/archive
 /src/main/resources/assets/minecraft
 /src/test
@@ -44,3 +43,6 @@ tests
 Thumbs.db
 tmp
 todo.*
+/build/
+/out/
+/run/
