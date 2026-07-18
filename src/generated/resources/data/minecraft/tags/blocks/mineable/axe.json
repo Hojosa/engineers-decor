@@ -1,0 +1,28 @@
+{
+  "remove": [
+    "engineersdecor:steel_mesh_fence_gate"
+  ],
+  "values": [
+    "engineersdecor:sign_radioactive",
+    "engineersdecor:sign_decor",
+    "engineersdecor:old_industrial_wood_planks",
+    "engineersdecor:sign_hotsurface",
+    "engineersdecor:old_industrial_wood_slabslice",
+    "engineersdecor:sign_defense",
+    "engineersdecor:treated_wood_pole_head",
+    "engineersdecor:sign_laser",
+    "engineersdecor:sign_danger",
+    "engineersdecor:sign_magneticfield",
+    "engineersdecor:treated_wood_pole_support",
+    "engineersdecor:sign_exit",
+    "engineersdecor:sign_caution",
+    "engineersdecor:sign_frost",
+    "engineersdecor:treated_wood_stool",
+    "engineersdecor:sign_magichazard",
+    "engineersdecor:sign_firehazard",
+    "engineersdecor:treated_wood_pole",
+    "engineersdecor:old_industrial_wood_stairs",
+    "engineersdecor:old_industrial_wood_slab",
+    "engineersdecor:sign_hotwire"
+  ]
+}
