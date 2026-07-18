@@ -27,7 +27,7 @@ public class EdBlockTags extends BlockTagsProvider {
 	@Override
 	protected void addTags(HolderLookup.Provider provider) {
 		List<Block> blocks = ModContent.getRegisteredBlocks();
-		tag(BlockTags.MINEABLE_WITH_PICKAXE).add(bySoundType(blocks, SoundType.STONE, SoundType.METAL));
+		tag(BlockTags.MINEABLE_WITH_PICKAXE).add(bySoundType(blocks, SoundType.STONE, SoundType.METAL, SoundType.NETHER_BRICKS));
 		tag(BlockTags.MINEABLE_WITH_AXE).add(bySoundType(blocks, SoundType.WOOD));
 		tag(BlockTags.MINEABLE_WITH_SHOVEL).add(bySoundType(blocks, SoundType.GRAVEL, SoundType.SAND));
 

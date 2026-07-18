@@ -24,6 +24,18 @@ public class EdEvents {
     	    if(mapping.getKey().getPath().equals("slag_brick_stairs")) {
     	    	mapping.remap(IEBlocks.TO_STAIRS.get(IEBlocks.StoneDecoration.SLAG_BRICK.getId()).get());
     	    }
+    	    if(mapping.getKey().getPath().equals("clinker_brick_block")) {
+    	    	mapping.remap(IEBlocks.StoneDecoration.CLINKER_BRICK.get());
+    	    }
+    	    if(mapping.getKey().getPath().equals("clinker_brick_slab")) {
+    	    	mapping.remap(IEBlocks.TO_SLAB.get(IEBlocks.StoneDecoration.CLINKER_BRICK.getId()).get());
+    	    }
+    	    if(mapping.getKey().getPath().equals("clinker_brick_stairs")) {
+    	    	mapping.remap(IEBlocks.TO_STAIRS.get(IEBlocks.StoneDecoration.CLINKER_BRICK.getId()).get());
+    	    }
+    	    if(mapping.getKey().getPath().equals("clinker_brick_sastor_corner_block")) {
+    	    	mapping.remap(IEBlocks.StoneDecoration.CLINKER_BRICK_QUOIN.get());
+    	    }
     	}
     	// For items
     	for (MissingMappingsEvent.Mapping<Item> mapping : event.getMappings(ForgeRegistries.Keys.ITEMS, ModEngineersDecor.MODID)) {
@@ -35,6 +47,18 @@ public class EdEvents {
     	    }
     	    if(mapping.getKey().getPath().equals("slag_brick_stairs")) {
     	    	mapping.remap(IEBlocks.TO_STAIRS.get(IEBlocks.StoneDecoration.SLAG_BRICK.getId()).asItem());
+    	    }
+    	    if(mapping.getKey().getPath().equals("clinker_brick_block")) {
+    	    	mapping.remap(IEBlocks.StoneDecoration.CLINKER_BRICK.asItem());
+    	    }
+    	    if(mapping.getKey().getPath().equals("clinker_brick_slab")) {
+    	    	mapping.remap(IEBlocks.TO_SLAB.get(IEBlocks.StoneDecoration.CLINKER_BRICK.getId()).asItem());
+    	    }
+    	    if(mapping.getKey().getPath().equals("clinker_brick_stairs")) {
+    	    	mapping.remap(IEBlocks.TO_STAIRS.get(IEBlocks.StoneDecoration.CLINKER_BRICK.getId()).asItem());
+    	    }
+    	    if(mapping.getKey().getPath().equals("clinker_brick_sastor_corner_block")) {
+    	    	mapping.remap(IEBlocks.StoneDecoration.CLINKER_BRICK_QUOIN.asItem());
     	    }
     	}
 	}

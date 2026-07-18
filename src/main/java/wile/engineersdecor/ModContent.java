@@ -76,51 +76,51 @@ public class ModContent
 
   public static void initBlocks()
   {
-    Registries.addBlock("clinker_brick_block", ()->new StandardBlocks.BaseBlock(
-      StandardBlocks.CFG_DEFAULT,
-      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(0.5f, 7f).sound(SoundType.STONE)
-    ));
-    Registries.addBlock("clinker_brick_slab", ()->new VariantSlabBlock(
-      StandardBlocks.CFG_DEFAULT,
-      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(0.5f, 7f).sound(SoundType.STONE)
-    ));
-    Registries.addBlock("clinker_brick_stairs", ()->new StandardStairsBlock(
-      StandardBlocks.CFG_DEFAULT,
-      ()->Registries.getBlock("clinker_brick_block").defaultBlockState(),
-      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(0.5f, 7f).sound(SoundType.STONE)
-    ));
+//    Registries.addBlock("clinker_brick_block", ()->new StandardBlocks.BaseBlock(
+//      StandardBlocks.CFG_DEFAULT,
+//      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(0.5f, 7f).sound(SoundType.STONE)
+//    ));
+//    Registries.addBlock("clinker_brick_slab", ()->new VariantSlabBlock(
+//      StandardBlocks.CFG_DEFAULT,
+//      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(0.5f, 7f).sound(SoundType.STONE)
+//    ));
+//    Registries.addBlock("clinker_brick_stairs", ()->new StandardStairsBlock(
+//      StandardBlocks.CFG_DEFAULT,
+//      ()->Registries.getBlock("clinker_brick_block").defaultBlockState(),
+//      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(0.5f, 7f).sound(SoundType.STONE)
+//    ));
     Registries.addBlock("clinker_brick_wall", ()->new EdWallBlock(
       StandardBlocks.CFG_DEFAULT,
-      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(0.5f, 7f).sound(SoundType.STONE)
+      BlockBehaviour.Properties.copy(IEBlocks.StoneDecoration.CLINKER_BRICK.get())
     ));
     Registries.addBlock("clinker_brick_stained_block", ()->new StandardBlocks.BaseBlock(
       StandardBlocks.CFG_DEFAULT,
-      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(0.5f, 7f).sound(SoundType.STONE)
+      BlockBehaviour.Properties.copy(IEBlocks.StoneDecoration.CLINKER_BRICK.get())
     ));
     Registries.addBlock("clinker_brick_stained_slab", ()->new VariantSlabBlock(
       StandardBlocks.CFG_DEFAULT,
-      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(0.5f, 7f).sound(SoundType.STONE)
+      BlockBehaviour.Properties.copy(IEBlocks.StoneDecoration.CLINKER_BRICK.get())
     ));
     Registries.addBlock("clinker_brick_stained_stairs", ()->new StandardStairsBlock(
       StandardBlocks.CFG_DEFAULT,
       ()->Registries.getBlock("clinker_brick_stained_block").defaultBlockState(),
-      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(0.5f, 7f).sound(SoundType.STONE)
+      BlockBehaviour.Properties.copy(IEBlocks.StoneDecoration.CLINKER_BRICK.get())
     ));
-    Registries.addBlock("clinker_brick_sastor_corner_block", ()->new EdCornerOrnamentedBlock(
-      StandardBlocks.CFG_DEFAULT,
-      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(0.5f, 7f).sound(SoundType.STONE),
-      new Block[]{
-        Registries.getBlock("clinker_brick_block"),
-        Registries.getBlock("clinker_brick_slab"),
-        Registries.getBlock("clinker_brick_stairs"),
-        Registries.getBlock("clinker_brick_stained_block"),
-        Registries.getBlock("clinker_brick_stained_slab"),
-        Registries.getBlock("clinker_brick_stained_stairs")
-      }
-    ));
+//    Registries.addBlock("clinker_brick_sastor_corner_block", ()->new EdCornerOrnamentedBlock(
+//      StandardBlocks.CFG_DEFAULT,
+//      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(0.5f, 7f).sound(SoundType.STONE),
+//      new Block[]{
+//        Registries.getBlock("clinker_brick_block"),
+//        Registries.getBlock("clinker_brick_slab"),
+//        Registries.getBlock("clinker_brick_stairs"),
+//        Registries.getBlock("clinker_brick_stained_block"),
+//        Registries.getBlock("clinker_brick_stained_slab"),
+//        Registries.getBlock("clinker_brick_stained_stairs")
+//      }
+//    ));
     Registries.addBlock("clinker_brick_recessed", ()->new StandardBlocks.HorizontalWaterLoggable(
       StandardBlocks.CFG_CUTOUT|StandardBlocks.CFG_HORIZIONTAL|StandardBlocks.CFG_LOOK_PLACEMENT,
-      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(0.5f, 7f).sound(SoundType.STONE),
+      BlockBehaviour.Properties.copy(IEBlocks.StoneDecoration.CLINKER_BRICK.get()),
       new AABB[] {
         Auxiliaries.getPixeledAABB( 3,0, 0, 13,16, 1),
         Auxiliaries.getPixeledAABB( 0,0, 1, 16,16,11),
@@ -129,7 +129,7 @@ public class ModContent
     ));
     Registries.addBlock("clinker_brick_vertically_slit", ()->new StandardBlocks.HorizontalWaterLoggable(
       StandardBlocks.CFG_CUTOUT|StandardBlocks.CFG_HORIZIONTAL|StandardBlocks.CFG_LOOK_PLACEMENT,
-      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(0.5f, 7f).sound(SoundType.STONE),
+      BlockBehaviour.Properties.copy(IEBlocks.StoneDecoration.CLINKER_BRICK.get()),
       new AABB[] {
         Auxiliaries.getPixeledAABB( 3,0, 0, 13,16, 1),
         Auxiliaries.getPixeledAABB( 3,0,15, 13,16,16),
@@ -138,7 +138,7 @@ public class ModContent
     ));
     Registries.addBlock("clinker_brick_vertical_slab_structured", ()->new StandardBlocks.HorizontalWaterLoggable(
       StandardBlocks.CFG_CUTOUT|StandardBlocks.CFG_HORIZIONTAL|StandardBlocks.CFG_LOOK_PLACEMENT,
-      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(0.5f, 7f).sound(SoundType.STONE),
+      BlockBehaviour.Properties.copy(IEBlocks.StoneDecoration.CLINKER_BRICK.get()),
       new AABB[] {
         Auxiliaries.getPixeledAABB( 0,0, 0, 16,16, 8),
       }
@@ -168,40 +168,40 @@ public class ModContent
 
     Registries.addBlock("rebar_concrete", ()->new StandardBlocks.BaseBlock(
       StandardBlocks.CFG_DEFAULT,
-      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(1.0f, 2000f).sound(SoundType.STONE).isValidSpawn(detail::disallowSpawn)
+      BlockBehaviour.Properties.copy(IEBlocks.StoneDecoration.CONCRETE.get()).strength(1.0f, 2000f).isValidSpawn(detail::disallowSpawn)
     ));
     Registries.addBlock("rebar_concrete_slab", ()->new VariantSlabBlock(
       StandardBlocks.CFG_DEFAULT,
-      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(1.0f, 2000f).sound(SoundType.STONE).isValidSpawn(detail::disallowSpawn)
+      BlockBehaviour.Properties.copy(IEBlocks.StoneDecoration.CONCRETE.get()).strength(1.0f, 2000f).isValidSpawn(detail::disallowSpawn)
     ));
     Registries.addBlock("rebar_concrete_stairs", ()->new StandardStairsBlock(
       StandardBlocks.CFG_DEFAULT,
       ()->Registries.getBlock("rebar_concrete").defaultBlockState(),
-      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(1.0f, 2000f).sound(SoundType.STONE).isValidSpawn(detail::disallowSpawn)
+      BlockBehaviour.Properties.copy(IEBlocks.StoneDecoration.CONCRETE.get()).strength(1.0f, 2000f).isValidSpawn(detail::disallowSpawn)
     ));
     Registries.addBlock("rebar_concrete_wall", ()->new EdWallBlock(
       StandardBlocks.CFG_DEFAULT,
-      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(1.0f, 2000f).sound(SoundType.STONE).isValidSpawn(detail::disallowSpawn)
+      BlockBehaviour.Properties.copy(IEBlocks.StoneDecoration.CONCRETE.get()).strength(1.0f, 2000f).isValidSpawn(detail::disallowSpawn)
     ));
     Registries.addBlock("halfslab_rebar_concrete", ()->new SlabSliceBlock(
       StandardBlocks.CFG_CUTOUT,
-      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(1.0f, 2000f).sound(SoundType.STONE).isValidSpawn(detail::disallowSpawn)
+      BlockBehaviour.Properties.copy(IEBlocks.StoneDecoration.CONCRETE.get()).strength(1.0f, 2000f).isValidSpawn(detail::disallowSpawn)
     ));
 
     // -------------------------------------------------------------------------------------------------------------------
 
     Registries.addBlock("rebar_concrete_tile", ()->new StandardBlocks.BaseBlock(
       StandardBlocks.CFG_DEFAULT,
-      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(1.0f, 2000f).sound(SoundType.STONE).isValidSpawn(detail::disallowSpawn)
+      BlockBehaviour.Properties.copy(IEBlocks.StoneDecoration.CONCRETE.get()).strength(1.0f, 2000f).isValidSpawn(detail::disallowSpawn)
     ));
     Registries.addBlock("rebar_concrete_tile_slab", ()->new VariantSlabBlock(
       StandardBlocks.CFG_DEFAULT,
-      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(1.0f, 2000f).sound(SoundType.STONE).isValidSpawn(detail::disallowSpawn)
+      BlockBehaviour.Properties.copy(IEBlocks.StoneDecoration.CONCRETE.get()).strength(1.0f, 2000f).isValidSpawn(detail::disallowSpawn)
     ));
     Registries.addBlock("rebar_concrete_tile_stairs", ()->new StandardStairsBlock(
       StandardBlocks.CFG_DEFAULT,
       ()->Registries.getBlock("rebar_concrete_tile").defaultBlockState(),
-      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(1.0f, 2000f).sound(SoundType.STONE).isValidSpawn(detail::disallowSpawn)
+      BlockBehaviour.Properties.copy(IEBlocks.StoneDecoration.CONCRETE.get()).strength(1.0f, 2000f).isValidSpawn(detail::disallowSpawn)
     ));
 
     // -------------------------------------------------------------------------------------------------------------------
@@ -219,7 +219,7 @@ public class ModContent
 
     Registries.addBlock("dark_shingle_roof", ()->new EdRoofBlock(
       StandardBlocks.CFG_CUTOUT,
-      BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(Blocks.STONE.defaultMapColor()).strength(0.5f, 6f).sound(SoundType.STONE).noOcclusion().dynamicShape().isValidSpawn(detail::disallowSpawn)
+      BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_TILE_STAIRS).isValidSpawn(detail::disallowSpawn)
     ));
     Registries.addBlock("dark_shingle_roof_metallized", ()->new EdRoofBlock(
       StandardBlocks.CFG_CUTOUT,
