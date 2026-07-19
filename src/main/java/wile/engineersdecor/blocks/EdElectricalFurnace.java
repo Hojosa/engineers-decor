@@ -250,14 +250,6 @@ public class EdElectricalFurnace
       field_is_burning_ = 0;
     }
 
-    public CompoundTag reset_getnbt()
-    {
-      CompoundTag nbt = new CompoundTag();
-      writenbt(nbt);
-      reset();
-      return nbt;
-    }
-
     public void readnbt(CompoundTag nbt)
     {
       burntime_left_ = nbt.getInt("BurnTime");
