@@ -101,44 +101,44 @@ public class EdWasteIncinerator
     public boolean shouldCheckWeakPower(BlockState state, SignalGetter level, BlockPos pos, Direction side)
     { return false; }
 
-    @Override
-    public void setPlacedBy(Level world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack)
-    {
-      if(world.isClientSide) return;
-      if((!stack.hasTag()) || (!stack.getTag().contains("tedata"))) return;
-      CompoundTag te_nbt = stack.getTag().getCompound("tedata");
-      if(te_nbt.isEmpty()) return;
-      final BlockEntity te = world.getBlockEntity(pos);
-      if(!(te instanceof EdWasteIncinerator.WasteIncineratorTileEntity)) return;
-      ((EdWasteIncinerator.WasteIncineratorTileEntity)te).readnbt(te_nbt);
-      te.setChanged();
-    }
+//    @Override
+//    public void setPlacedBy(Level world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack)
+//    {
+//      if(world.isClientSide) return;
+////      if((!stack.hasTag()) || (!stack.getTag().contains("tedata"))) return;
+////      CompoundTag te_nbt = stack.getTag().getCompound("tedata");
+////      if(te_nbt.isEmpty()) return;
+//      final BlockEntity te = world.getBlockEntity(pos);
+//      if(!(te instanceof EdWasteIncinerator.WasteIncineratorTileEntity)) return;
+//      ((EdWasteIncinerator.WasteIncineratorTileEntity)te).readnbt(te_nbt);
+////      te.setChanged();
+//    }
 
-    @Override
-    public boolean hasDynamicDropList()
-    { return true; }
-
-    @Override
-    public List<ItemStack> dropList(BlockState state, Level world, final BlockEntity te, boolean explosion)
-    {
-      final List<ItemStack> stacks = new ArrayList<>();
-      if(world.isClientSide) return stacks;
-      if(!(te instanceof WasteIncineratorTileEntity)) return stacks;
-      if(!explosion) {
-        ItemStack stack = new ItemStack(this, 1);
-        CompoundTag te_nbt = ((WasteIncineratorTileEntity) te).getnbt();
-        if(!te_nbt.isEmpty()) {
-          CompoundTag nbt = new CompoundTag();
-          nbt.put("tedata", te_nbt);
-          stack.setTag(nbt);
-        }
-        stacks.add(stack);
-      } else {
-        for(ItemStack stack: ((WasteIncineratorTileEntity)te).main_inventory_) stacks.add(stack);
-        ((WasteIncineratorTileEntity)te).getnbt();
-      }
-      return stacks;
-    }
+//    @Override
+//    public boolean hasDynamicDropList()
+//    { return true; }
+//
+//    @Override
+//    public List<ItemStack> dropList(BlockState state, Level world, final BlockEntity te, boolean explosion)
+//    {
+//      final List<ItemStack> stacks = new ArrayList<>();
+//      if(world.isClientSide) return stacks;
+//      if(!(te instanceof WasteIncineratorTileEntity)) return stacks;
+//      if(!explosion) {
+//        ItemStack stack = new ItemStack(this, 1);
+//        CompoundTag te_nbt = ((WasteIncineratorTileEntity) te).getnbt();
+//        if(!te_nbt.isEmpty()) {
+//          CompoundTag nbt = new CompoundTag();
+//          nbt.put("tedata", te_nbt);
+//          stack.setTag(nbt);
+//        }
+//        stacks.add(stack);
+//      } else {
+//        for(ItemStack stack: ((WasteIncineratorTileEntity)te).main_inventory_) stacks.add(stack);
+//        ((WasteIncineratorTileEntity)te).getnbt();
+//      }
+//      return stacks;
+//    }
 
     @Override
     @SuppressWarnings("deprecation")
@@ -184,8 +184,8 @@ public class EdWasteIncinerator
     public WasteIncineratorTileEntity(BlockPos pos, BlockState state)
     { super(ModContent.getBlockEntityTypeOfBlock(state.getBlock()), pos, state); reset(); }
 
-    public CompoundTag getnbt()
-    { return writenbt(new CompoundTag()); }
+//    public CompoundTag getnbt()
+//    { return writenbt(new CompoundTag()); }
 
     protected void reset()
     {
@@ -210,12 +210,22 @@ public class EdWasteIncinerator
     // BlockEntity ------------------------------------------------------------------------------
 
     @Override
-    public void load(CompoundTag nbt)
-    { super.load(nbt); readnbt(nbt); }
+    public void load(CompoundTag nbt) {
+		super.load(nbt); 
+		CompoundTag dataTag = nbt.getCompound("Data");
+		if (dataTag.isEmpty()) {
+			readnbt(nbt);
+		}
+		else readnbt(nbt.getCompound("Data"));
+    }
 
     @Override
-    protected void saveAdditional(CompoundTag nbt)
-    { super.saveAdditional(nbt); writenbt(nbt); }
+    protected void saveAdditional(CompoundTag nbt) {
+    	super.saveAdditional(nbt); 
+    	CompoundTag state = new CompoundTag();
+    	writenbt(state);
+    	nbt.put("Data", state);
+    }
 
     @Override
     public void setRemoved()

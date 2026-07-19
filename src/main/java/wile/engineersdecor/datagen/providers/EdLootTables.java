@@ -54,23 +54,16 @@ public class EdLootTables extends VanillaBlockLoot {
 				"Items", "BurnTime", "CookTime", "CookTimeTotal", "XpStored", "SpeedSetting", "Energy");
 		createStandardTable(ModContent.getBlock("factory_dropper"),
 				"Data");
-		
-//
-//		 "tedata" tag group (stored items/filter/fluid settings):
-//		 - factory_dropper
-//		 - factory_placer
-//		 - factory_hopper
-//		 - small_waste_incinerator
-//		 - fluid_barrel
-//		 - small_fluid_funnel
-		// TODO: temporary placeholders below, still have live dropList() overrides
-//		dropSelf(ModContent.getBlock("factory_dropper"));
-		dropSelf(ModContent.getBlock("factory_placer"));
-		dropSelf(ModContent.getBlock("factory_hopper"));
-		dropSelf(ModContent.getBlock("small_waste_incinerator"));
-		dropSelf(ModContent.getBlock("fluid_barrel"));
-		dropSelf(ModContent.getBlock("small_fluid_funnel"));
-
+		createStandardTable(ModContent.getBlock("factory_placer"),
+				"Data");
+		createStandardTable(ModContent.getBlock("factory_hopper"),
+				"Data");
+		createStandardTable(ModContent.getBlock("small_waste_incinerator"),
+				"Data");
+		createStandardTable(ModContent.getBlock("fluid_barrel"),
+				"");
+		createStandardTable(ModContent.getBlock("small_fluid_funnel"),
+				"");
 	}
 
 	private void createStandardTable(Block block, String... tags) {
@@ -80,9 +73,6 @@ public class EdLootTables extends VanillaBlockLoot {
 			lti.apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy(tag, "BlockEntityTag." + tag,
 					CopyNbtFunction.MergeStrategy.REPLACE));
 		}
-		//lti.apply(SetContainerContents.setContents(type)
-				//.withEntry(DynamicLoot.dynamicEntry(new ResourceLocation("minecraft", "contents"))));
-
 		LootPool.Builder builder = LootPool.lootPool().setRolls(ConstantValue.exactly(1)).add(lti);
 		add(block, LootTable.lootTable().withPool(builder));
 	}

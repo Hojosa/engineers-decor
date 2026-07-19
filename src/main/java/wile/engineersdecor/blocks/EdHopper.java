@@ -8,6 +8,12 @@
  */
 package wile.engineersdecor.blocks;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Supplier;
+
+import javax.annotation.Nullable;
+
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -15,14 +21,25 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.world.*;
+import net.minecraft.world.Container;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.Nameable;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.*;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ClickType;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.inventory.SimpleContainerData;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -43,12 +60,14 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import wile.engineersdecor.ModContent;
-import wile.engineersdecor.libmc.*;
-
-import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Supplier;
+import wile.engineersdecor.libmc.Auxiliaries;
+import wile.engineersdecor.libmc.Guis;
+import wile.engineersdecor.libmc.Inventories;
+import wile.engineersdecor.libmc.Networking;
+import wile.engineersdecor.libmc.RsSignals;
+import wile.engineersdecor.libmc.StandardBlocks;
+import wile.engineersdecor.libmc.StandardEntityBlocks;
+import wile.engineersdecor.libmc.TooltipDisplay;
 
 
 public class EdHopper
@@ -87,42 +106,9 @@ public class EdHopper
     public void setPlacedBy(Level world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack)
     {
       if(world.isClientSide) return;
-      if((!stack.hasTag()) || (!stack.getTag().contains("tedata"))) return;
-      CompoundTag te_nbt = stack.getTag().getCompound("tedata");
-      if(te_nbt.isEmpty()) return;
       final BlockEntity te = world.getBlockEntity(pos);
       if(!(te instanceof HopperTileEntity)) return;
-      ((HopperTileEntity)te).readnbt(te_nbt, false);
       ((HopperTileEntity)te).reset_rtstate();
-      te.setChanged();
-    }
-
-    @Override
-    public boolean hasDynamicDropList()
-    { return true; }
-
-    @Override
-    public List<ItemStack> dropList(BlockState state, Level world, final BlockEntity te, boolean explosion)
-    {
-      final List<ItemStack> stacks = new ArrayList<>();
-      if(world.isClientSide) return stacks;
-      if(!(te instanceof HopperTileEntity)) return stacks;
-      if(!explosion) {
-        ItemStack stack = new ItemStack(this, 1);
-        CompoundTag te_nbt = ((HopperTileEntity)te).clear_getnbt();
-        if(!te_nbt.isEmpty()) {
-          CompoundTag nbt = new CompoundTag();
-          nbt.put("tedata", te_nbt);
-          stack.setTag(nbt);
-        }
-        stacks.add(stack);
-      } else {
-        for(ItemStack stack: ((HopperTileEntity)te).main_inventory_) {
-          if(!stack.isEmpty()) stacks.add(stack);
-        }
-        ((HopperTileEntity)te).reset_rtstate();
-      }
-      return stacks;
     }
 
     @Override
@@ -216,19 +202,6 @@ public class EdHopper
       block_power_updated_ = false;
     }
 
-    public CompoundTag clear_getnbt()
-    {
-      CompoundTag nbt = new CompoundTag();
-      block_power_signal_ = false;
-      writenbt(nbt, false);
-      boolean is_empty = main_inventory_.isEmpty();
-      main_inventory_.clearContent();
-      reset_rtstate();
-      block_power_updated_ = false;
-      if(is_empty) nbt = new CompoundTag();
-      return nbt;
-    }
-
     public void readnbt(CompoundTag nbt, boolean update_packet)
     {
       main_inventory_.load(nbt);
@@ -263,12 +236,22 @@ public class EdHopper
     // BlockEntity --------------------------------------------------------------------------------------------
 
     @Override
-    public void load(CompoundTag nbt)
-    { super.load(nbt); readnbt(nbt, false); }
+    public void load(CompoundTag nbt) {     	
+    	super.load(nbt); 
+		CompoundTag dataTag = nbt.getCompound("Data");
+		if (dataTag.isEmpty()) {
+			readnbt(nbt, false);
+		}
+		else readnbt(nbt.getCompound("Data"), false);
+	}
 
     @Override
-    protected void saveAdditional(CompoundTag nbt)
-    { super.saveAdditional(nbt); writenbt(nbt, false); }
+    protected void saveAdditional(CompoundTag nbt){ 
+    	super.saveAdditional(nbt); 
+    	CompoundTag state = new CompoundTag();
+    	writenbt(state, false);
+    	nbt.put("Data", state);
+    }
 
     @Override
     public void setRemoved()

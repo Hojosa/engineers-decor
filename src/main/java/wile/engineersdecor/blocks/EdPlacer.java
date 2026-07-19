@@ -103,42 +103,42 @@ public class EdPlacer
     public void setPlacedBy(Level world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack)
     {
       if(world.isClientSide) return;
-      if((!stack.hasTag()) || (!stack.getTag().contains("tedata"))) return;
-      CompoundTag te_nbt = stack.getTag().getCompound("tedata");
-      if(te_nbt.isEmpty()) return;
+//      if((!stack.hasTag()) || (!stack.getTag().contains("tedata"))) return;
+//      CompoundTag te_nbt = stack.getTag().getCompound("tedata");
+//      if(te_nbt.isEmpty()) return;
       if(!(world.getBlockEntity(pos) instanceof final PlacerTileEntity te)) return;
-      te.readnbt(te_nbt, false);
+//      te.readnbt(te_nbt, false);
       te.reset_rtstate();
       te.setChanged();
     }
 
-    @Override
-    public boolean hasDynamicDropList()
-    { return true; }
-
-    @Override
-    public List<ItemStack> dropList(BlockState state, Level world, final BlockEntity te, boolean explosion)
-    {
-      final List<ItemStack> stacks = new ArrayList<>();
-      if(world.isClientSide) return stacks;
-      if(!(te instanceof PlacerTileEntity)) return stacks;
-      if(!explosion) {
-        ItemStack stack = new ItemStack(this, 1);
-        CompoundTag te_nbt = ((PlacerTileEntity) te).clear_getnbt();
-        if(!te_nbt.isEmpty()) {
-          CompoundTag nbt = new CompoundTag();
-          nbt.put("tedata", te_nbt);
-          stack.setTag(nbt);
-        }
-        stacks.add(stack);
-      } else {
-        for(ItemStack stack: ((PlacerTileEntity)te).inventory_) {
-          if(!stack.isEmpty()) stacks.add(stack);
-        }
-        ((PlacerTileEntity)te).reset_rtstate();
-      }
-      return stacks;
-    }
+//    @Override
+//    public boolean hasDynamicDropList()
+//    { return true; }
+//
+//    @Override
+//    public List<ItemStack> dropList(BlockState state, Level world, final BlockEntity te, boolean explosion)
+//    {
+//      final List<ItemStack> stacks = new ArrayList<>();
+//      if(world.isClientSide) return stacks;
+//      if(!(te instanceof PlacerTileEntity)) return stacks;
+//      if(!explosion) {
+//        ItemStack stack = new ItemStack(this, 1);
+//        CompoundTag te_nbt = ((PlacerTileEntity) te).clear_getnbt();
+//        if(!te_nbt.isEmpty()) {
+//          CompoundTag nbt = new CompoundTag();
+//          nbt.put("tedata", te_nbt);
+//          stack.setTag(nbt);
+//        }
+//        stacks.add(stack);
+//      } else {
+//        for(ItemStack stack: ((PlacerTileEntity)te).inventory_) {
+//          if(!stack.isEmpty()) stacks.add(stack);
+//        }
+//        ((PlacerTileEntity)te).reset_rtstate();
+//      }
+//      return stacks;
+//    }
 
     @Override
     @SuppressWarnings("deprecation")
@@ -203,15 +203,15 @@ public class EdPlacer
       );
     }
 
-    public CompoundTag clear_getnbt()
-    {
-      CompoundTag nbt = new CompoundTag();
-      writenbt(nbt, false);
-      inventory_.clearContent();
-      reset_rtstate();
-      block_power_updated_ = false;
-      return nbt;
-    }
+//    public CompoundTag clear_getnbt()
+//    {
+//      CompoundTag nbt = new CompoundTag();
+//      writenbt(nbt, false);
+//      inventory_.clearContent();
+//      reset_rtstate();
+//      block_power_updated_ = false;
+//      return nbt;
+//    }
 
     public void reset_rtstate()
     {
@@ -250,12 +250,22 @@ public class EdPlacer
     // BlockEntity ------------------------------------------------------------------------------
 
     @Override
-    public void load(CompoundTag nbt)
-    { super.load(nbt); readnbt(nbt, false); }
+    public void load(CompoundTag nbt) { 
+    	super.load(nbt); 
+		CompoundTag dataTag = nbt.getCompound("Data");
+		if (dataTag.isEmpty()) {
+			readnbt(nbt, false);
+		}
+		else readnbt(nbt.getCompound("Data"), false);
+	}
 
     @Override
-    protected void saveAdditional(CompoundTag nbt)
-    { super.saveAdditional(nbt); writenbt(nbt, false); }
+    protected void saveAdditional(CompoundTag nbt) { 
+    	super.saveAdditional(nbt); 
+    	CompoundTag state = new CompoundTag();
+    	writenbt(state, false);
+    	nbt.put("Data", state);
+	}
 
     @Override
     public void setRemoved()

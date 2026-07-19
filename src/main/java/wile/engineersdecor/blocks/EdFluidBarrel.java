@@ -97,27 +97,6 @@ public class EdFluidBarrel
     { return true; }
 
     @Override
-    public boolean hasDynamicDropList()
-    { return true; }
-
-    @Override
-    public List<ItemStack> dropList(BlockState state, Level world, final BlockEntity te, boolean explosion)
-    {
-      final List<ItemStack> stacks = new ArrayList<>();
-      if(world.isClientSide) return stacks;
-      if(!(te instanceof FluidBarrelTileEntity)) return stacks;
-      ItemStack stack = new ItemStack(this, 1);
-      CompoundTag te_nbt = ((FluidBarrelTileEntity) te).clear_getnbt();
-      if(!te_nbt.isEmpty()) {
-        CompoundTag nbt = new CompoundTag();
-        nbt.put("tedata", te_nbt);
-        stack.setTag(nbt);
-      }
-      stacks.add(stack);
-      return stacks;
-    }
-
-    @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(final ItemStack stack, @Nullable BlockGetter world, List<Component> tooltip, TooltipFlag flag)
     {
@@ -322,10 +301,18 @@ public class EdFluidBarrel
 
     private static CompoundTag read_fluid_nbt(ItemStack stack)
     {
-      if((!stack.hasTag()) || (!stack.getTag().contains("tedata"))) return new CompoundTag();
-      final CompoundTag nbt = stack.getTag().getCompound("tedata");
-      if(!nbt.contains("tank", Tag.TAG_COMPOUND)) return new CompoundTag();
-      return nbt.getCompound("tank");
+    	if(!stack.hasTag()) return new CompoundTag();
+        final CompoundTag tag = stack.getTag();
+        if(tag.contains("tedata")) {
+          final CompoundTag nbt = tag.getCompound("tedata");
+          if(nbt.contains("tank", Tag.TAG_COMPOUND)) return nbt.getCompound("tank");
+        }
+        if(tag.contains("BlockEntityTag")) {
+          final CompoundTag beTag = tag.getCompound("BlockEntityTag");
+          if(beTag.contains("tank", Tag.TAG_COMPOUND)) return beTag.getCompound("tank");
+        }
+        return new CompoundTag();
+
     }
 
     private static void write_fluid_nbt(ItemStack stack, CompoundTag fluid_nbt)
@@ -390,5 +377,4 @@ public class EdFluidBarrel
       return setFluid(stack, fs);
     }
   }
-
 }

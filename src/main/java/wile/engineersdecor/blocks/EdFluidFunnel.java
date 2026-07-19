@@ -122,32 +122,6 @@ public class EdFluidFunnel
     }
 
     @Override
-    public boolean hasDynamicDropList()
-    { return true; }
-
-    @Override
-    public List<ItemStack> dropList(BlockState state, Level world, final BlockEntity te, boolean explosion)
-    {
-      final List<ItemStack> stacks = new ArrayList<>();
-      if(world.isClientSide) return stacks;
-      if(!(te instanceof FluidFunnelTileEntity)) return stacks;
-      if(!explosion) {
-        ItemStack stack = new ItemStack(this, 1);
-        CompoundTag te_nbt = new CompoundTag();
-        ((FluidFunnelTileEntity)te).writenbt(te_nbt);
-        if(!te_nbt.isEmpty()) {
-          CompoundTag nbt = new CompoundTag();
-          nbt.put("tedata", te_nbt);
-          stack.setTag(nbt);
-        }
-        stacks.add(stack);
-      } else {
-        stacks.add(new ItemStack(this, 1));
-      }
-      return stacks;
-    }
-
-    @Override
     @SuppressWarnings("deprecation")
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult rayTraceResult)
     {
