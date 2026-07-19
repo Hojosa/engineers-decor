@@ -114,45 +114,10 @@ public class EdDropper
     { return (world.getBlockEntity(pos) instanceof DropperTileEntity te) ? RsSignals.fromContainer(te.storage_slot_range_) : 0; }
 
     @Override
-    public void setPlacedBy(Level world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack)
-    {
+    public void setPlacedBy(Level world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
       if(world.isClientSide) return;
-      if((!stack.hasTag()) || (!stack.getTag().contains("tedata"))) return;
-      CompoundTag te_nbt = stack.getTag().getCompound("tedata");
-      if(te_nbt.isEmpty()) return;
       final BlockEntity te = world.getBlockEntity(pos);
-      if(!(te instanceof EdDropper.DropperTileEntity)) return;
-      ((EdDropper.DropperTileEntity)te).readnbt(te_nbt, false);
       ((EdDropper.DropperTileEntity)te).reset_rtstate();
-      te.setChanged();
-    }
-
-    @Override
-    public boolean hasDynamicDropList()
-    { return true; }
-
-    @Override
-    public List<ItemStack> dropList(BlockState state, Level world, final BlockEntity te, boolean explosion)
-    {
-      final List<ItemStack> stacks = new ArrayList<>();
-      if(world.isClientSide) return stacks;
-      if(!(te instanceof DropperTileEntity)) return stacks;
-      if(!explosion) {
-        ItemStack stack = new ItemStack(this, 1);
-        CompoundTag te_nbt = ((DropperTileEntity) te).clear_getnbt();
-        if(!te_nbt.isEmpty()) {
-          CompoundTag nbt = new CompoundTag();
-          nbt.put("tedata", te_nbt);
-          stack.setTag(nbt);
-        }
-        stacks.add(stack);
-      } else {
-        for(ItemStack stack: ((DropperTileEntity)te).main_inventory_) {
-          if(!stack.isEmpty()) stacks.add(stack);
-        }
-        ((DropperTileEntity)te).reset_rtstate();
-      }
-      return stacks;
     }
 
     @Override
@@ -222,17 +187,6 @@ public class EdDropper
     public DropperTileEntity(BlockPos pos, BlockState state)
     { super(ModContent.getBlockEntityTypeOfBlock(state.getBlock()), pos, state); reset_rtstate(); }
 
-    public CompoundTag clear_getnbt()
-    {
-      CompoundTag nbt = new CompoundTag();
-      writenbt(nbt, false);
-      main_inventory_.clearContent();
-      reset_rtstate();
-      triggered_ = false;
-      block_power_updated_ = false;
-      return nbt;
-    }
-
     public void reset_rtstate()
     {
       block_power_signal_ = false;
@@ -282,12 +236,22 @@ public class EdDropper
     // BlockEntity ------------------------------------------------------------------------------
 
     @Override
-    public void load(CompoundTag nbt)
-    { super.load(nbt); readnbt(nbt, false); }
+    public void load(CompoundTag nbt) { 
+    	super.load(nbt); 
+    	CompoundTag dataTag = nbt.getCompound("Data");
+    	if (dataTag.isEmpty()) {
+    		readnbt(nbt, false);
+    	}
+    	else readnbt(nbt.getCompound("Data"), false);
+    }
 
     @Override
-    protected void saveAdditional(CompoundTag nbt)
-    { super.saveAdditional(nbt); writenbt(nbt, false); }
+    protected void saveAdditional(CompoundTag nbt) { 
+    	super.saveAdditional(nbt); 
+    	CompoundTag state = new CompoundTag();
+    	writenbt(state, false);
+    	nbt.put("Data", state);
+    }
 
     @Override
     public void setRemoved()
@@ -933,8 +897,5 @@ public class EdDropper
       } else {
         super.slotClicked(slot, slotId, button, type);
       }
-    }
-
-  }
-
+    }}
 }

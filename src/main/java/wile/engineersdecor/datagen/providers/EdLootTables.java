@@ -52,9 +52,9 @@ public class EdLootTables extends VanillaBlockLoot {
 				"Items", "BurnTime", "CookTime", "CookTimeTotal", "FuelBurnTime", "XpStored", "Energy");
 		createStandardTable(ModContent.getBlock("small_electrical_furnace"),
 				"Items", "BurnTime", "CookTime", "CookTimeTotal", "XpStored", "SpeedSetting", "Energy");
-//		todo:
-//		"inventory" tag group (smelting inventory):
-//		- small_electrical_furnace
+		createStandardTable(ModContent.getBlock("factory_dropper"),
+				"Data");
+		
 //
 //		 "tedata" tag group (stored items/filter/fluid settings):
 //		 - factory_dropper
@@ -64,8 +64,7 @@ public class EdLootTables extends VanillaBlockLoot {
 //		 - fluid_barrel
 //		 - small_fluid_funnel
 		// TODO: temporary placeholders below, still have live dropList() overrides
-		dropSelf(ModContent.getBlock("small_electrical_furnace"));
-		dropSelf(ModContent.getBlock("factory_dropper"));
+//		dropSelf(ModContent.getBlock("factory_dropper"));
 		dropSelf(ModContent.getBlock("factory_placer"));
 		dropSelf(ModContent.getBlock("factory_hopper"));
 		dropSelf(ModContent.getBlock("small_waste_incinerator"));

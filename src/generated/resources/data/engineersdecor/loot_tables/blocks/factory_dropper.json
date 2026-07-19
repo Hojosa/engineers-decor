@@ -3,14 +3,26 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
-      ],
       "entries": [
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:copy_name",
+              "source": "block_entity"
+            },
+            {
+              "function": "minecraft:copy_nbt",
+              "ops": [
+                {
+                  "op": "replace",
+                  "source": "Data",
+                  "target": "BlockEntityTag.Data"
+                }
+              ],
+              "source": "block_entity"
+            }
+          ],
           "name": "engineersdecor:factory_dropper"
         }
       ],
