@@ -23,14 +23,70 @@
               "source": "block_entity"
             },
             {
-              "type": "engineersdecor:tet_small_lab_furnace",
-              "entries": [
+              "function": "minecraft:copy_nbt",
+              "ops": [
                 {
-                  "type": "minecraft:dynamic",
-                  "name": "minecraft:contents"
+                  "op": "replace",
+                  "source": "BurnTime",
+                  "target": "BlockEntityTag.BurnTime"
                 }
               ],
-              "function": "minecraft:set_contents"
+              "source": "block_entity"
+            },
+            {
+              "function": "minecraft:copy_nbt",
+              "ops": [
+                {
+                  "op": "replace",
+                  "source": "CookTime",
+                  "target": "BlockEntityTag.CookTime"
+                }
+              ],
+              "source": "block_entity"
+            },
+            {
+              "function": "minecraft:copy_nbt",
+              "ops": [
+                {
+                  "op": "replace",
+                  "source": "CookTimeTotal",
+                  "target": "BlockEntityTag.CookTimeTotal"
+                }
+              ],
+              "source": "block_entity"
+            },
+            {
+              "function": "minecraft:copy_nbt",
+              "ops": [
+                {
+                  "op": "replace",
+                  "source": "FuelBurnTime",
+                  "target": "BlockEntityTag.FuelBurnTime"
+                }
+              ],
+              "source": "block_entity"
+            },
+            {
+              "function": "minecraft:copy_nbt",
+              "ops": [
+                {
+                  "op": "replace",
+                  "source": "XpStored",
+                  "target": "BlockEntityTag.XpStored"
+                }
+              ],
+              "source": "block_entity"
+            },
+            {
+              "function": "minecraft:copy_nbt",
+              "ops": [
+                {
+                  "op": "replace",
+                  "source": "Energy",
+                  "target": "BlockEntityTag.Energy"
+                }
+              ],
+              "source": "block_entity"
             }
           ],
           "name": "engineersdecor:small_lab_furnace"

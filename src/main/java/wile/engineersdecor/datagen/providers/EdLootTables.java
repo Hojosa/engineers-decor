@@ -49,7 +49,7 @@ public class EdLootTables extends VanillaBlockLoot {
 
 		// BEs where we save the nbt data on drop
 		createStandardTable(ModContent.getBlock("small_lab_furnace"),
-				ModContent.getBlockEntityTypeOfBlock("small_lab_furnace"), "Items");
+				ModContent.getBlockEntityTypeOfBlock("small_lab_furnace"), "Items", "BurnTime", "CookTime", "CookTimeTotal", "FuelBurnTime", "XpStored", "Energy");
 
 //		todo:
 //		"inventory" tag group (smelting inventory):
@@ -81,8 +81,8 @@ public class EdLootTables extends VanillaBlockLoot {
 			lti.apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy(tag, "BlockEntityTag." + tag,
 					CopyNbtFunction.MergeStrategy.REPLACE));
 		}
-		lti.apply(SetContainerContents.setContents(type)
-				.withEntry(DynamicLoot.dynamicEntry(new ResourceLocation("minecraft", "contents"))));
+		//lti.apply(SetContainerContents.setContents(type)
+				//.withEntry(DynamicLoot.dynamicEntry(new ResourceLocation("minecraft", "contents"))));
 
 		LootPool.Builder builder = LootPool.lootPool().setRolls(ConstantValue.exactly(1)).add(lti);
 		add(block, LootTable.lootTable().withPool(builder));

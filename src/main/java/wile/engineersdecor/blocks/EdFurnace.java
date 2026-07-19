@@ -122,40 +122,10 @@ public class EdFurnace
     {
       world.setBlockAndUpdate(pos, state.setValue(LIT, false));
       if(world.isClientSide) return;
-      if((!stack.hasTag()) || (!stack.getTag().contains("inventory"))) return;
-      CompoundTag inventory_nbt = stack.getTag().getCompound("inventory");
-      if(inventory_nbt.isEmpty()) return;
       final BlockEntity te = world.getBlockEntity(pos);
-      if(!(te instanceof final FurnaceTileEntity bte)) return;
-      bte.readnbt(inventory_nbt);
-      bte.setChanged();
+      if(!(te instanceof final FurnaceTileEntity bte) || !bte.burning()) return;
       world.setBlockAndUpdate(pos, state.setValue(LIT, bte.burning()));
     }
-
-//    @Override
-//    public boolean hasDynamicDropList()
-//    { return true; }
-//
-//    @Override
-//    public List<ItemStack> dropList(BlockState state, Level world, final BlockEntity te, boolean explosion) {
-//      final List<ItemStack> stacks = new ArrayList<>();
-//      if(world.isClientSide) return stacks;
-//      if(!(te instanceof FurnaceTileEntity)) return stacks;
-//      if(!explosion) {
-//        ItemStack stack = new ItemStack(this, 1);
-//        CompoundTag inventory_nbt = ((FurnaceTileEntity)te).reset_getnbt();
-//        if(!inventory_nbt.isEmpty()) {
-//          CompoundTag nbt = new CompoundTag();
-//          nbt.put("inventory", inventory_nbt);
-//          stack.setTag(nbt);
-//        }
-//        stacks.add(stack);
-//      } else {
-//        for(ItemStack stack: ((FurnaceTileEntity)te).inventory_) stacks.add(stack);
-//        ((FurnaceTileEntity)te).reset();
-//      }
-//      return stacks;
-//    }
 
     @Override
     @SuppressWarnings("deprecation")
@@ -179,7 +149,6 @@ public class EdFurnace
         default -> world.addParticle(ParticleTypes.SMOKE, x + xr, yr, z + xc, 0.0, 0.0, 0.0);
       }
     }
-
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -491,7 +460,7 @@ public class EdFurnace
       if(burning() || (!fuel.isEmpty()) && (!(inventory_.getItem(SMELTING_INPUT_SLOT_NO)).isEmpty())) {
         Recipe<?> last_recipe = currentRecipe();
         updateCurrentRecipe();
-        if(currentRecipe() != last_recipe) {
+        if(currentRecipe() != last_recipe && (last_recipe != null)) {
           proc_time_elapsed_ = 0;
           proc_time_needed_ = getSmeltingTimeNeeded(level, inventory_.getItem(SMELTING_INPUT_SLOT_NO));
         }
