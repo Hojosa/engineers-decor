@@ -49,11 +49,11 @@ public class EdLootTables extends VanillaBlockLoot {
 
 		// BEs where we save the nbt data on drop
 		createStandardTable(ModContent.getBlock("small_lab_furnace"),
-				ModContent.getBlockEntityTypeOfBlock("small_lab_furnace"), "Items", "BurnTime", "CookTime", "CookTimeTotal", "FuelBurnTime", "XpStored", "Energy");
-
+				"Items", "BurnTime", "CookTime", "CookTimeTotal", "FuelBurnTime", "XpStored", "Energy");
+		createStandardTable(ModContent.getBlock("small_electrical_furnace"),
+				"Items", "BurnTime", "CookTime", "CookTimeTotal", "XpStored", "SpeedSetting", "Energy");
 //		todo:
 //		"inventory" tag group (smelting inventory):
-//		- small_lab_furnace
 //		- small_electrical_furnace
 //
 //		 "tedata" tag group (stored items/filter/fluid settings):
@@ -74,7 +74,7 @@ public class EdLootTables extends VanillaBlockLoot {
 
 	}
 
-	private void createStandardTable(Block block, BlockEntityType<?> type, String... tags) {
+	private void createStandardTable(Block block, String... tags) {
 		LootPoolSingletonContainer.Builder<?> lti = LootItem.lootTableItem(block);
 		lti.apply(CopyNameFunction.copyName(CopyNameFunction.NameSource.BLOCK_ENTITY));
 		for (String tag : tags) {
