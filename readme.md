@@ -1,15 +1,23 @@
 
-## Engineer's Decor (MC1.18.x)
+## Engineer's Decor (MC1.20.x)
+![Forge](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/supported/forge_vector.svg)
+[![Available on Github](https://rawcdn.githack.com/intergrav/devins-badges/1aec26abb75544baec37249f42008b2fcc0e731f/assets/cozy/available/github_vector.svg)](https://github.com/Hojosa/engineers-decor)
+[![Available on Modrinth](https://rawcdn.githack.com/intergrav/devins-badges/1aec26abb75544baec37249f42008b2fcc0e731f/assets/cozy/available/modrinth_vector.svg)](https://modrinth.com/mod/engineers-decor-revived)
+[![Available on Curseforge](https://rawcdn.githack.com/intergrav/devins-badges/1aec26abb75544baec37249f42008b2fcc0e731f/assets/cozy/available/curseforge_vector.svg)](https://www.curseforge.com/minecraft/mc-mods/engineers-decor-re-vived)
 
-Mod sources for Minecraft version 1.18.x.
+Mod sources for Minecraft version 1.20.x.
 
 - Description, credits, and features: Please see the readme in the repository root.
 
-- Compiled mod distribution channel is curseforge: https://www.curseforge.com/minecraft/mc-mods/engineers-decor/files.
+- Compiled mod distribution channel is curseforge: https://www.curseforge.com/minecraft/mc-mods/engineers-decor-re-vived/files.
 
 ----
 
 ## Version history
+    - v1.3.32    [A] Migrated existing blocks that now exist in IE (clinker bricks, slab bricks, etc.) to be replaced by thier IE counterparts
+                 [F] fixed hardness values of all blocks
+                 
+    - v1.3.30    [U] Ported to 1.20.1
 
     - v1.3.29    [F] Fenced config opt-out processing with exception handling in case config
                      apply is called before registry events have finished.
