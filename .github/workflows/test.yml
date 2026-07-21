@@ -1,0 +1,56 @@
+name: Test Workflow to Build Mod
+
+on:
+  push:
+    tags:
+      - 'test*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Setup Gradle
+        run: chmod +x gradlew
+
+      - name: Build
+        run: ./gradlew build
+
+      - name: Prepare values for upload
+        id: props 
+        run: |
+            echo "mod_name=$(grep '^mod_name=' gradle.properties | cut -d'=' -f2)" >> $GITHUB_OUTPUT
+            echo "mod_version=$(grep '^mod_version=' gradle.properties | cut -d'=' -f2)" >> $GITHUB_OUTPUT
+            echo "mc_version=$(grep '^minecraft_version=' gradle.properties | cut -d'=' -f2)" >> $GITHUB_OUTPUT
+
+      - name: Publish Mod
+        uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          files: build/libs/!(*-@(dev|sources|javadoc)).jar
+          name: "${{ steps.props.outputs.mod_name }} ${{ steps.props.outputs.mod_version }} for ${{ steps.props.outputs.mc_version }}"
+          version: "${{ steps.props.outputs.mod_version }}"
+          #modrinth-id: nIS3DCHl
+          #modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+
+          #curseforge-id: 1255041
+          #curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}

@@ -2,30 +2,37 @@
 # @spec TOML v0.5.0 (https://github.com/toml-lang/toml)
 modLoader="javafml"
 loaderVersion="[47,)"
-issueTrackerURL="https://github.com/stfwi/engineers-decor/issues/"
+issueTrackerURL="https://github.com/Hojosa/engineers-decor/issues"
 license="MIT"
 
 [[mods]]
 modId="engineersdecor"
-version="1.3.30"
+version="${mod_version}"
 displayName="Engineer's Decor"
 description="Adds cosmetic blocks for the engineer's workshop, factory and home."
-authors="wilechaote"
+authors="wilechaote, Waffle919185, Hojosa"
 credits="BluSunrize, Damien Hazard, malte0811, et al., the Forge Smiths."
 updateJSONURL="https://raw.githubusercontent.com/stfwi/engineers-decor/versions/forge-1.19.2.json"
-displayURL="https://www.curseforge.com/minecraft/mc-mods/engineers-decor"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/engineers-decor-re-vived/"
 logoFile="logo.png"
 
 [[dependencies.engineersdecor]]
-  modId="forge"
-  mandatory=true
-  versionRange="[47,)"
-  ordering="NONE"
-  side="BOTH"
+	modId="forge"
+	mandatory=true
+	versionRange="[47,)"
+	ordering="NONE"
+	side="BOTH"
 
 [[dependencies.engineersdecor]]
-  modId="minecraft"
-  mandatory=true
-  versionRange="[1.20.1]"
-  ordering="NONE"
-  side="BOTH"
+	modId="minecraft"
+	mandatory=true
+	versionRange="[1.20.1]"
+	ordering="NONE"
+	side="BOTH"
+
+  [[dependencies.engineersdecor]]
+	modId="immersiveengineering"
+	mandatory=true
+	versionRange="${ie_version}"
+	ordering="NONE"
+	side="BOTH"
