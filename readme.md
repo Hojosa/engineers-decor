@@ -14,7 +14,7 @@ Mod sources for Minecraft version 1.20.x.
 ----
 
 ## Version history
-    - v1.3.32    [A] Migrated existing blocks that now exist in IE (clinker bricks, slab bricks, etc.) to be replaced by thier IE counterparts
+    - v1.3.32    [A] Migrated existing blocks that now exist in IE (clinker bricks, slab bricks, etc.) to be replaced by their IE counterparts
                  [F] fixed hardness values of all blocks
                  
     - v1.3.30    [U] Ported to 1.20.1
