@@ -49,6 +49,7 @@ jobs:
           files: build/libs/!(*-@(dev|sources|javadoc)).jar
           name: "${{ steps.props.outputs.mod_name }} ${{ steps.props.outputs.mod_version }} for ${{ steps.props.outputs.mc_version }}"
           version: "${{ steps.props.outputs.mod_version }}"
+          changelog: ${{ github.event.release.body }}
           environment: client | server
 
           curseforge-id: 1619471
@@ -60,6 +61,7 @@ jobs:
           files: build/libs/!(*-@(dev|sources|javadoc)).jar
           name: "${{ steps.props.outputs.mod_name }} ${{ steps.props.outputs.mod_version }} for ${{ steps.props.outputs.mc_version }}"
           version: "${{ steps.props.outputs.mod_version }}"
+          changelog: ${{ github.event.release.body }}
           environment: client | server
 
           modrinth-id: hTzwY5Z7
